@@ -18,44 +18,45 @@ namespace Test_Ecommerce.Scripts
             loginpage.EnterEmail("").EnterPassword("").ClickLogin();
             Assert.That(driver.FindElement(By.CssSelector(".alert.alert-danger.alert-dismissible")).Displayed, Is.EqualTo(true));
             Assert.That(loginpage.getLoginButton().Displayed, Is.EqualTo(true));
-            Assert.AreEqual(driver.FindElement(By.CssSelector(".alert.alert-danger.alert-dismissible")).Text, "Warning : Please Enter email and password");
+            Assert.That(loginpage.getLoginErrorMsg().Contains("Warning : Please Enter email and password"), Is.EqualTo(true));
             Assert.AreEqual(driver.Title, "Account Login");
         }
         [Test]
         public void loginWithValidCredentials()
         {
-            new LoginPage().EnterEmail(TestData.LoginData.email).EnterPassword(TestData.LoginData.passWord).ClickLogin();
-
+            LoginPage loginpage = new LoginPage();
+            loginpage.EnterEmail(TestData.LoginData.email).EnterPassword(TestData.LoginData.passWord).ClickLogin();
+            loginpage.waitForLogin();
+            Assert.AreEqual(new DashboardPage().getMyAccount(), "My Account");
+            Assert.AreEqual(new DashboardPage().geteditAccount(), "Edit your account information");
         }
         [Test]
-        public void loginWithInValidCredentials()
+        public void loginWithInvalidCredentials()
         {
-            new LoginPage().EnterEmail("Invalid").EnterPassword("Invalid").ClickLogin();
+            LoginPage loginpage = new LoginPage();
+            loginpage.EnterEmail("Invalid").EnterPassword("Invalid").ClickLogin();
             Assert.AreEqual(driver.Title, "Account Login");
-
+            Assert.AreEqual(loginpage.getLoginErrorMsg(), "Warning: No match for E-Mail Address and/or Password.");
         }
 
         [Test]
         public void loginWithValidEmail()
         {
-            new LoginPage().EnterEmail(TestData.LoginData.email).ClickLogin();
+            LoginPage loginpage = new LoginPage();
+            loginpage.EnterEmail(TestData.LoginData.email).ClickLogin();
             Assert.AreEqual(driver.Title, "Account Login");
+            Assert.AreEqual(loginpage.getLoginErrorMsg(), "Warning: No match for E-Mail Address and/or Password.");
 
         }
 
         [Test]
         public void loginWithValidPassword()
         {
-            new LoginPage().EnterEmail(TestData.LoginData.email).ClickLogin();
+            LoginPage loginpage = new LoginPage();
+            loginpage.EnterPassword(TestData.LoginData.email).ClickLogin();
             Assert.AreEqual(driver.Title, "Account Login");
+            Assert.AreEqual(loginpage.getLoginErrorMsg(), "Warning: No match for E-Mail Address and/or Password.");
 
         }
-
-
-
-
-
-
-
     }
 }
