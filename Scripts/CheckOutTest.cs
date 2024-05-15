@@ -17,7 +17,6 @@ namespace Test_Ecommerce.Scripts
             new WebDriverWait(driver, TimeSpan.FromSeconds(TestData.Configs.explicitWaitTimeOut)).Until(ExpectedConditions.ElementExists(By.CssSelector("button[title='Buy now']")));
             driver.FindElement(By.CssSelector("button[title='Buy now']")).Click();
             Thread.Sleep(3000);
-
             CheckOutPage checkOut = new CheckOutPage();
             checkOut.checkoutWithExistingAddress();
             checkOut.confirmOrder();

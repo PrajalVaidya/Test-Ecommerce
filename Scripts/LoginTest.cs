@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Test_Ecommerce.Pages;
 
 namespace Test_Ecommerce.Scripts
@@ -38,7 +33,6 @@ namespace Test_Ecommerce.Scripts
             Assert.AreEqual(driver.Title, "Account Login");
             Assert.AreEqual(loginpage.getLoginErrorMsg(), "Warning: No match for E-Mail Address and/or Password.");
         }
-
         [Test]
         public void loginWithValidEmail()
         {
@@ -48,7 +42,6 @@ namespace Test_Ecommerce.Scripts
             Assert.AreEqual(loginpage.getLoginErrorMsg(), "Warning: No match for E-Mail Address and/or Password.");
 
         }
-
         [Test]
         public void loginWithValidPassword()
         {

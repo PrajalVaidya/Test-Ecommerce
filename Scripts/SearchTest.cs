@@ -17,7 +17,6 @@ namespace Test_Ecommerce.Scripts
             Thread.Sleep(1000);
 
         }
-
         [Test]
         public void testSearchLabelTitleUrl()
         {
@@ -47,7 +46,7 @@ namespace Test_Ecommerce.Scripts
         }
         //Search ipod in sub category selected as PC
         [Test]
-        public void searchInSubCategories()
+        public void testsearchInSubCategories()
         {
             driver.Navigate().GoToUrl(Url.searchUrl);
             SearchPage searchpage = new SearchPage();
